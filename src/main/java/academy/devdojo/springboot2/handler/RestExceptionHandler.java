@@ -3,6 +3,7 @@ package academy.devdojo.springboot2.handler;
 import academy.devdojo.springboot2.exception.BadRequestException;
 import academy.devdojo.springboot2.exception.BadRequestExceptionDetails;
 import academy.devdojo.springboot2.exception.ValidationExceptionDetails;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
+@Log4j2
 public class RestExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
@@ -30,7 +32,7 @@ public class RestExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ValidationExceptionDetails> handlerMethodArgentNotValidException(
+    public ResponseEntity<ValidationExceptionDetails> handlerMethodArgumentNotValidException(
             MethodArgumentNotValidException exception) {
 
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();

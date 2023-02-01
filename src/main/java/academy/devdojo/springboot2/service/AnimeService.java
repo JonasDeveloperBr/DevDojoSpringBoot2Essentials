@@ -28,7 +28,7 @@ public class AnimeService {
 
     public Anime findByIdOrThrowBadRequestException(long id) {
         return animeRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Anime not found"));
+                .orElseThrow(() -> new BadRequestException("Anime not Found"));
     }
 
     @Transactional(rollbackFor = Exception.class)
