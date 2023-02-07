@@ -25,7 +25,7 @@ class AnimeRepositoryTest {
 
     private Anime createAnime() {
         return Anime.builder()
-                .name("Name for Test")
+                .name("Name for Test 2")
                 .build();
     }
 }
