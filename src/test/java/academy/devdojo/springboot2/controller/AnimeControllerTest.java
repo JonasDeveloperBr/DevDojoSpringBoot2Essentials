@@ -3,6 +3,7 @@ package academy.devdojo.springboot2.controller;
 import academy.devdojo.springboot2.domain.Anime;
 import academy.devdojo.springboot2.service.AnimeService;
 import academy.devdojo.springboot2.util.AnimeCreator;
+import academy.devdojo.springboot2.util.DateUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,6 +28,8 @@ class AnimeControllerTest {
     private AnimeController animeController;
     @Mock
     private AnimeService animeServiceMock;
+    @Mock
+    private DateUtil dateUtil;
 
     @BeforeEach
     void setUp() {
