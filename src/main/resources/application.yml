@@ -11,9 +11,21 @@ spring:
     hibernate:
       ddl-auto: update
 
-
 logging:
   level:
     org:
       hibernate:
         SQL: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+info:
+  app: Spring Boot 2 Essentials By DevDojo
+  website: http://devdojo.academy
+  github: https://github.com/JonasDeveloperBr/DevDojoSpringBoot2Essentials
+  extra: Jonas Henrique do Nascimento
+  linkedin: https://www.linkedin.com/in/jonas-nascimento83/
