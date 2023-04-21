@@ -23,4 +23,5 @@ public class Anime {
 
     @NotEmpty(message = "The anime name cannot be empty")
     private String name;
+
 }

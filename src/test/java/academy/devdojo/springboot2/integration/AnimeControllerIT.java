@@ -9,6 +9,7 @@ import academy.devdojo.springboot2.util.AnimeCreator;
 import academy.devdojo.springboot2.util.AnimePostRequestBodyCreator;
 import academy.devdojo.springboot2.wrapper.PageableResponse;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.ObjectAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,17 @@ class AnimeControllerIT {
     @Autowired
     @Qualifier(value = "testRestTemplateRoleUser")
     private TestRestTemplate testRestTemplateRoleUser;
+
     @Autowired
     @Qualifier(value = "testRestTemplateRoleAdmin")
     private TestRestTemplate testRestTemplateRoleAdmin;
+
     @Autowired
     private AnimeRepository animeRepository;
+
     @Autowired
     private DevDojoUserRepository devDojoUserRepository;
+
     private static final DevDojoUser USER = DevDojoUser.builder()
             .name("DevDojo Academy")
             .password("{bcrypt}$2a$10$ULsoF4S8Icv81k.5g1DShuWW51TofUedCKk9NwoRJRgV7oc.vq8YS")
@@ -168,7 +173,7 @@ class AnimeControllerIT {
         ResponseEntity<Anime> animeResponseEntity = testRestTemplateRoleUser
                 .postForEntity("/animes", animePostRequestBody, Anime.class);
 
-        Assertions.assertThat(animeResponseEntity).isNotNull();
+        ObjectAssert<ResponseEntity<Anime>> notNull = Assertions.assertThat(animeResponseEntity).isNotNull();
         Assertions.assertThat(animeResponseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         Assertions.assertThat(animeResponseEntity.getBody()).isNotNull();
         Assertions.assertThat(animeResponseEntity.getBody().getId()).isNotNull();
@@ -180,6 +185,7 @@ class AnimeControllerIT {
         Anime savedAnime = animeRepository.save(AnimeCreator.createAnimeToBeSaved());
         devDojoUserRepository.save(USER);
         savedAnime.setName("New name");
+        Assertions.assertThat(savedAnime.getName()).isNotEmpty();
 
         ResponseEntity<Void> animeResponseEntity = testRestTemplateRoleUser
                 .exchange("/animes", HttpMethod.PUT, new HttpEntity<>(savedAnime), Void.class);
