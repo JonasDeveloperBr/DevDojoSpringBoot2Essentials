@@ -17,6 +17,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import static academy.devdojo.springboot2.constants.MessageConstants.USER_NAME_CANNOT_BE_EMPTY;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +30,7 @@ public class DevDojoUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "The user's name cannot be empty")
+    @NotEmpty(message = USER_NAME_CANNOT_BE_EMPTY)
     private String name;
     private String username;
     private String password;

@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static academy.devdojo.springboot2.constants.MessageConstants.*;
+
 @ControllerAdvice
 @Log4j2
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
@@ -30,7 +32,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 BadRequestExceptionDetails.builder()
                         .timestamp(LocalDateTime.now())
                         .status(HttpStatus.BAD_REQUEST.value())
-                        .title("Bad Request Exception, Check the Documentation")
+                        .title(BAD_REQUEST_EXCEPTION_CHECK_DOCUMENTATION)
                         .details(bre.getMessage())
                         .developerMessage(bre.getClass().getName())
                         .build(), HttpStatus.BAD_REQUEST);
@@ -48,8 +50,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 ValidationExceptionDetails.builder()
                         .timestamp(LocalDateTime.now())
                         .status(HttpStatus.BAD_REQUEST.value())
-                        .title("Bad Request Exception, Invalid Fields")
-                        .details("Check the field(s) error")
+                        .title(BAD_REQUEST_EXCEPTION_INVALID_FIELDS)
+                        .details(CHECK_THE_FIELD_ERROR)
                         .developerMessage(exception.getClass().getName())
                         .fields(fields)
                         .fieldsMessage(fieldsMessage)

@@ -23,6 +23,8 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static academy.devdojo.springboot2.constants.MessageConstants.*;
+
 @RestController
 @RequestMapping("animes")
 @Log4j2
@@ -73,8 +75,8 @@ public class AnimeController {
 
     @DeleteMapping(path = "/admin/{id}")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Successful Operation"),
-            @ApiResponse(responseCode = "400", description = "When Anime Doesn't Exist in The Database"),
+            @ApiResponse(responseCode = HTTP_204, description = SUCCESSFUL_OPERATION),
+            @ApiResponse(responseCode = HTTP_400, description = WHEN_ANIME_DOESN_T_EXIST_IN_THE_DATABASE),
     })
     public ResponseEntity<Void> delete(@PathVariable long id) {
         animeService.delete(id);

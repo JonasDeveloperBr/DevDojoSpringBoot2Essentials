@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static academy.devdojo.springboot2.constants.MessageConstants.ANIME_NOT_FOUND;
+
 @Service
 @RequiredArgsConstructor
 public class AnimeService {
@@ -34,7 +36,7 @@ public class AnimeService {
 
     public Anime findByIdOrThrowBadRequestException(long id) {
         return animeRepository.findById(id)
-                .orElseThrow(() -> new BadRequestException("Anime not Found"));
+                .orElseThrow(() -> new BadRequestException(ANIME_NOT_FOUND));
     }
 
     @Transactional(rollbackFor = Exception.class)
