@@ -15,30 +15,22 @@ public class SpringClient {
 
     public static void main(String[] args) {
 
-        ResponseEntity<Anime> entity = new RestTemplate().getForEntity(URL+"{id}", Anime.class, 59);
+        ResponseEntity<Anime> entity = new RestTemplate().getForEntity(URL + "{id}", Anime.class, 59);
         log.info(entity);
 
-        Anime object = new RestTemplate().getForObject(URL+"{id}", Anime.class, 59);
+        Anime object = new RestTemplate().getForObject(URL + "{id}", Anime.class, 59);
         log.info(object);
 
         Anime[] animes = new RestTemplate().getForObject(URL, Anime[].class);
         log.info(Arrays.toString(animes));
 
         ResponseEntity<List<Anime>> exchange = new RestTemplate().exchange(
-                URL+"all",
+                URL + "all",
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<>() {});
+                new ParameterizedTypeReference<>() {
+                });
         log.info(exchange.getBody());
-
-//        Anime kingdom = Anime.builder().name("kingdom").build();
-//        Anime kingdomSaved = new RestTemplate().postForObject(URL, kingdom, Anime.class);
-//        log.info("saved anime {}", kingdomSaved);
-//
-//        Anime anime = new Anime();
-//        anime.setName("United");
-//        Anime united = new RestTemplate().postForObject(URL, anime, Anime.class);
-//        log.info("saved anime {}", united);
 
         Anime samuraiChamplo = Anime.builder().name("Samurai Champloo").build();
         ResponseEntity<Anime> samuraiChamplooSaved = new RestTemplate().exchange(
@@ -57,7 +49,7 @@ public class SpringClient {
                 Void.class);
         log.info(samuraiChamploUpdated);
 
-        ResponseEntity<Void> samuraiChamplooDeleted = new RestTemplate().exchange(URL+"{id}",
+        ResponseEntity<Void> samuraiChamplooDeleted = new RestTemplate().exchange(URL + "{id}",
                 HttpMethod.DELETE,
                 null,
                 Void.class,

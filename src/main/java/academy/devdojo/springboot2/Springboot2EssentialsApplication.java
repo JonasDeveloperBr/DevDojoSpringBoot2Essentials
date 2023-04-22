@@ -10,13 +10,13 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Springboot2EssentialsApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Springboot2EssentialsApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Springboot2EssentialsApplication.class, args);
+    }
 
-	@Bean
-	MeterRegistryCustomizer<MeterRegistry> configurer(
-			@Value("${spring.application.name}") String applicationName) {
-		return (registry) -> registry.config().commonTags("application", applicationName);
-	}
+    @Bean
+    MeterRegistryCustomizer<MeterRegistry> configurer(
+            @Value("${spring.application.name}") String applicationName) {
+        return (registry) -> registry.config().commonTags("application", applicationName);
+    }
 }

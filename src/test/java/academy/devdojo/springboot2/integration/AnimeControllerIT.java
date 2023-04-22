@@ -72,6 +72,7 @@ class AnimeControllerIT {
                     .basicAuthentication("devdojo", "academy");
             return new TestRestTemplate(restTemplateBuilder);
         }
+
         @Bean(name = "testRestTemplateRoleAdmin")
         public TestRestTemplate testRestTemplateRoleAdminCreator(@Value("${local.server.port}") int port) {
             RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder()
