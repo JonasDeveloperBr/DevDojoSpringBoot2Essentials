@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
+import static academy.devdojo.springboot2.constants.MessageConstants.ANIME_NAME_CANNOT_BE_EMPTY;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +23,7 @@ public class Anime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "The anime name cannot be empty")
+    @NotEmpty(message = ANIME_NAME_CANNOT_BE_EMPTY)
     private String name;
 
 }

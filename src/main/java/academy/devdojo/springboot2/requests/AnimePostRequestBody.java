@@ -8,13 +8,16 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
 
+import static academy.devdojo.springboot2.constants.MessageConstants.ANIME_NAME_CANNOT_BE_EMPTY;
+import static academy.devdojo.springboot2.constants.MessageConstants.THIS_IS_THE_ANIME_S_NAME;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnimePostRequestBody {
-    @NotEmpty(message = "The anime name cannot be empty")
-    @Schema(description = "This is the Anime's name", example = "Tensei Shittara Slime Datta Ken")
+    @NotEmpty(message = ANIME_NAME_CANNOT_BE_EMPTY)
+    @Schema(description = THIS_IS_THE_ANIME_S_NAME, example = "Tensei Shittara Slime Datta Ken")
     private String name;
 
 }

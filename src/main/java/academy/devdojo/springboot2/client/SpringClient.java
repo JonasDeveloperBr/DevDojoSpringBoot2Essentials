@@ -9,16 +9,17 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 
+import static academy.devdojo.springboot2.constants.MessageConstants.*;
+
 @Log4j2
 public class SpringClient {
-    private static final String URL = "http://localhost:8080/animes/";
 
     public static void main(String[] args) {
 
-        ResponseEntity<Anime> entity = new RestTemplate().getForEntity(URL + "{id}", Anime.class, 59);
+        ResponseEntity<Anime> entity = new RestTemplate().getForEntity(URL + KEY_ID, Anime.class, 59);
         log.info(entity);
 
-        Anime object = new RestTemplate().getForObject(URL + "{id}", Anime.class, 59);
+        Anime object = new RestTemplate().getForObject(URL + KEY_ID, Anime.class, 59);
         log.info(object);
 
         Anime[] animes = new RestTemplate().getForObject(URL, Anime[].class);
@@ -38,7 +39,7 @@ public class SpringClient {
                 HttpMethod.POST,
                 new HttpEntity<>(samuraiChamplo),
                 Anime.class);
-        log.info("saved anime {}", samuraiChamplooSaved);
+        log.info(SAVED_ANIME, samuraiChamplooSaved);
 
         Anime animeToBeUpdated = samuraiChamplooSaved.getBody();
         animeToBeUpdated.setName("Samurai Champloo 2");
@@ -49,7 +50,7 @@ public class SpringClient {
                 Void.class);
         log.info(samuraiChamploUpdated);
 
-        ResponseEntity<Void> samuraiChamplooDeleted = new RestTemplate().exchange(URL + "{id}",
+        ResponseEntity<Void> samuraiChamplooDeleted = new RestTemplate().exchange(URL + KEY_ID,
                 HttpMethod.DELETE,
                 null,
                 Void.class,
