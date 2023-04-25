@@ -2,7 +2,9 @@ package academy.devdojo.springboot2.constants;
 
 public abstract class MessageConstants {
 
-    public static final String URL = "http://localhost:8080/animes/";
+    public static final String URL_BASIC = "http://localhost:8080";
+    public static final String URL_V1_ANIMES = "/v1/animes";
+    public static final String URL_ADMIN_ID = "/admin/{id}";
     public static final String KEY_ID = "{id}";
     public static final String SAVED_ANIME = "saved anime {}";
     public static final String SUCCESSFUL_OPERATION = "Successful Operation";

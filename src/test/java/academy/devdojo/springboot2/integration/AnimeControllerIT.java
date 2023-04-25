@@ -31,6 +31,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
+import static academy.devdojo.springboot2.constants.MessageConstants.*;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -172,7 +174,7 @@ class AnimeControllerIT {
         AnimePostRequestBody animePostRequestBody = AnimePostRequestBodyCreator.createAnimePostRequestBody();
         devDojoUserRepository.save(USER);
         ResponseEntity<Anime> animeResponseEntity = testRestTemplateRoleUser
-                .postForEntity("/animes", animePostRequestBody, Anime.class);
+                .postForEntity(URL_V1_ANIMES, animePostRequestBody, Anime.class);
 
         ObjectAssert<ResponseEntity<Anime>> notNull = Assertions.assertThat(animeResponseEntity).isNotNull();
         Assertions.assertThat(animeResponseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -189,7 +191,7 @@ class AnimeControllerIT {
         Assertions.assertThat(savedAnime.getName()).isNotEmpty();
 
         ResponseEntity<Void> animeResponseEntity = testRestTemplateRoleUser
-                .exchange("/animes", HttpMethod.PUT, new HttpEntity<>(savedAnime), Void.class);
+                .exchange(URL_V1_ANIMES, HttpMethod.PUT, new HttpEntity<>(savedAnime), Void.class);
 
         Assertions.assertThat(animeResponseEntity).isNotNull();
 
@@ -202,7 +204,7 @@ class AnimeControllerIT {
         Anime savedAnime = animeRepository.save(AnimeCreator.createAnimeToBeSaved());
         devDojoUserRepository.save(ADMIN);
         ResponseEntity<Void> animeResponseEntity = testRestTemplateRoleAdmin
-                .exchange("/animes/admin/{id}", HttpMethod.DELETE, null, Void.class, savedAnime.getId());
+                .exchange(URL_V1_ANIMES+URL_ADMIN_ID, HttpMethod.DELETE, null, Void.class, savedAnime.getId());
 
         Assertions.assertThat(animeResponseEntity).isNotNull();
 
@@ -215,9 +217,10 @@ class AnimeControllerIT {
         Anime savedAnime = animeRepository.save(AnimeCreator.createAnimeToBeSaved());
         devDojoUserRepository.save(USER);
         ResponseEntity<Void> animeResponseEntity = testRestTemplateRoleUser
-                .exchange("/animes/admin/{id}", HttpMethod.DELETE, null, Void.class, savedAnime.getId());
+                .exchange(URL_V1_ANIMES+URL_ADMIN_ID, HttpMethod.DELETE, null, Void.class, savedAnime.getId());
 
-        Assertions.assertThat(animeResponseEntity).isNotNull();
+//        Assertions.assertThat(animeResponseEntity).isNotNull();
+        ObjectAssert<ResponseEntity<Void>> notNull = Assertions.assertThat(animeResponseEntity).isNotNull();
 
         Assertions.assertThat(animeResponseEntity.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
     }

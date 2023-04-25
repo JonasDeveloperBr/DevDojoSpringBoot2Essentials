@@ -16,17 +16,17 @@ public class SpringClient {
 
     public static void main(String[] args) {
 
-        ResponseEntity<Anime> entity = new RestTemplate().getForEntity(URL + KEY_ID, Anime.class, 59);
+        ResponseEntity<Anime> entity = new RestTemplate().getForEntity(URL_BASIC + KEY_ID, Anime.class, 59);
         log.info(entity);
 
-        Anime object = new RestTemplate().getForObject(URL + KEY_ID, Anime.class, 59);
+        Anime object = new RestTemplate().getForObject(URL_BASIC + KEY_ID, Anime.class, 59);
         log.info(object);
 
-        Anime[] animes = new RestTemplate().getForObject(URL, Anime[].class);
+        Anime[] animes = new RestTemplate().getForObject(URL_BASIC, Anime[].class);
         log.info(Arrays.toString(animes));
 
         ResponseEntity<List<Anime>> exchange = new RestTemplate().exchange(
-                URL + "all",
+                URL_BASIC + "all",
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<>() {
@@ -35,7 +35,7 @@ public class SpringClient {
 
         Anime samuraiChamplo = Anime.builder().name("Samurai Champloo").build();
         ResponseEntity<Anime> samuraiChamplooSaved = new RestTemplate().exchange(
-                URL,
+                URL_BASIC,
                 HttpMethod.POST,
                 new HttpEntity<>(samuraiChamplo),
                 Anime.class);
@@ -44,13 +44,13 @@ public class SpringClient {
         Anime animeToBeUpdated = samuraiChamplooSaved.getBody();
         animeToBeUpdated.setName("Samurai Champloo 2");
 
-        ResponseEntity<Void> samuraiChamploUpdated = new RestTemplate().exchange(URL,
+        ResponseEntity<Void> samuraiChamploUpdated = new RestTemplate().exchange(URL_BASIC,
                 HttpMethod.PUT,
                 new HttpEntity<>(animeToBeUpdated, createJsonHeader()),
                 Void.class);
         log.info(samuraiChamploUpdated);
 
-        ResponseEntity<Void> samuraiChamplooDeleted = new RestTemplate().exchange(URL + KEY_ID,
+        ResponseEntity<Void> samuraiChamplooDeleted = new RestTemplate().exchange(URL_BASIC + KEY_ID,
                 HttpMethod.DELETE,
                 null,
                 Void.class,
