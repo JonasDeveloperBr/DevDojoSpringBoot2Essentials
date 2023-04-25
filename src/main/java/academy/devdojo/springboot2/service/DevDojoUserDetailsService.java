@@ -18,6 +18,7 @@ public class DevDojoUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
+        log.info("Load details of user {}", username);
         return (UserDetails) Optional.ofNullable(devDojoUserRepository.findByUsername(username))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }

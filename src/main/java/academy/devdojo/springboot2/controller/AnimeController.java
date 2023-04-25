@@ -26,7 +26,7 @@ import java.util.List;
 import static academy.devdojo.springboot2.constants.MessageConstants.*;
 
 @RestController
-@RequestMapping("animes")
+@RequestMapping("/v1/animes")
 @Log4j2
 @RequiredArgsConstructor
 public class AnimeController {
